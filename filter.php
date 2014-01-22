@@ -15,6 +15,7 @@ $filter = function ($movie) {
     //return $movie['rating'] >= 7.0 && $movie['year'] == 2012 && $movie['votes'] >= 10000;
     return $movie['rating'] >= 7.0 && $movie['year'] == 2012;
 };
+$output = 'torrent';
 
 $exist = 0;
 $next = 0;
@@ -25,7 +26,7 @@ do {
     foreach ($keys as $key) {
         $movie = $redis13->hgetall(str_replace('YIFY', 'IMDb', $key));
         if ($movie && $filter($movie)) {
-            print $redis12->hget($key, 'magnet')."\n";
+            print $redis12->hget($key, $output)."\n";
         }
     }
 } while ($next !== 0);
