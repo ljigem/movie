@@ -11,9 +11,9 @@ $redis0 = $redis();
 $redis13 = $redis(13);
 $redis12 = $redis(12);
 
-$filter = function ($movie) {
-    //return $movie['rating'] >= 7.0 && $movie['year'] == 2012 && $movie['votes'] >= 10000;
-    return $movie['rating'] >= 7.0 && $movie['year'] == 2012;
+$options = getopt('y:r:') + ['y' => 2013, 'r' => 7.0];
+$filter = function ($movie) use ($options) {
+    return $movie['rating'] >= (float)($options['r']) && $movie['year'] == (int)($options['y']);
 };
 $output = 'torrent';
 
